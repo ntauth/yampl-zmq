@@ -12,7 +12,7 @@ if (WITH_ZMQ_PLUGIN)
     ExternalProject_Add(ZeroMQ
         GIT_REPOSITORY "https://github.com/zeromq/libzmq"
         PREFIX ${ZEROMQ_ROOT}
-        GIT_TAG "4.2.5"
+        GIT_TAG "d062edd8c142384792955796329baf1e5a3377cd"
         UPDATE_COMMAND ""
         PATCH_COMMAND ""
         INSTALL_DIR ${ZEROMQ_ROOT}/bin
