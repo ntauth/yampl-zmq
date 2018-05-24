@@ -19,7 +19,6 @@ if (WITH_ZMQ_PLUGIN)
         CMAKE_ARGS -DZMQ_BUILD_TESTS=OFF -DWITH_PERF_TOOL=OFF -DENABLE_CPACK=OFF -DCMAKE_INSTALL_PREFIX=${ZEROMQ_ROOT}/bin
         BUILD_COMMAND make
         TEST_COMMAND ""
-        BUILD_BYPRODUCTS ${ZEROMQ_LIB_DIR}/libzeromq.a
     )
 
     add_library(yampl-zmq SHARED
@@ -32,7 +31,8 @@ if (WITH_ZMQ_PLUGIN)
     
     add_dependencies(yampl-zmq ZeroMQ)
 
-    target_include_directories(yampl-zmq PRIVATE plugins/yampl-zmq/include)
+    target_include_directories(yampl-zmq PRIVATE plugins/yampl-zmq/include zeromq/bin/include)
+    target_link_libraries(yampl-zmq zeromq/bin/lib/libzmq.a)
 
     set_target_properties(yampl-zmq
             PROPERTIES
