@@ -1,4 +1,4 @@
-#include <zmq.hpp>
+#include <zmq.h>
 
 #include "SocketBase.h"
 

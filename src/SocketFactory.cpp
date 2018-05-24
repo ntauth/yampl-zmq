@@ -1,4 +1,4 @@
-#include <zmq.hpp>
+#include <zmq.h>
 
 #include "SocketFactory.h"
 #include "ClientSocket.h"
