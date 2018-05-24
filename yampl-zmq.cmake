@@ -46,7 +46,7 @@ if (WITH_ZMQ_PLUGIN)
             ${YAMPL_PLUGIN_COMMON_SRCS}
     )
     
-    add_dependecies(yampl-zmq CppMQ)
+    add_dependencies(yampl-zmq CppMQ)
     add_dependencies(CppMQ ZeroMQ)
     
     target_include_directories(yampl-zmq PRIVATE ${CMAKE_CURRENT_LIST_DIR}/include/ ${ZEROMQ_INCLUDE_DIR})
