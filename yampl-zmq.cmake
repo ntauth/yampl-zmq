@@ -31,8 +31,8 @@ if (WITH_ZMQ_PLUGIN)
     
     add_dependencies(yampl-zmq ZeroMQ)
 
-    target_include_directories(yampl-zmq PRIVATE plugins/yampl-zmq/include zeromq/bin/include)
-    target_link_libraries(yampl-zmq zeromq/bin/lib/libzmq.a)
+    target_include_directories(yampl-zmq PRIVATE ${CMAKE_BINARY_DIR}/plugins/yampl-zmq/include ${ZEROMQ_INCLUDE_DIR})
+    target_link_libraries(yampl-zmq ${ZEROMQ_LIB_DIR}/libzmq.a)
 
     set_target_properties(yampl-zmq
             PROPERTIES
