@@ -4,16 +4,22 @@
 include(ExternalProject)
 
 if (WITH_ZMQ_PLUGIN)	    
-    # Pull ZeroMQ  
+    # Pull ZeroMQ
+    set(ZEROMQ_ROOT ${CMAKE_BINARY_DIR}/zeromq)
+    set(ZEROMQ_LIB_DIR ${ZEROMQ_ROOT}/bin/lib)
+    set(ZEROMQ_INCLUDE_DIR ${ZEROMQ_ROOT}/bin/include)
+
     ExternalProject_Add(ZeroMQ
         GIT_REPOSITORY "https://github.com/zeromq/libzmq"
+        PREFIX ${ZEROMQ_ROOT}
         GIT_TAG "4.2.5"
         UPDATE_COMMAND ""
         PATCH_COMMAND ""
-
-        SOURCE_DIR "zeromq"
+        INSTALL_DIR ${ZEROMQ_ROOT}/bin
         CMAKE_ARGS -DZMQ_BUILD_TESTS=OFF -DWITH_PERF_TOOL=OFF -DENABLE_CPACK=OFF
+        BUILD_COMMAND make
         TEST_COMMAND ""
+        BUILD_BYPRODUCTS ${ZEROMQ_LIB_DIR}/libzeromq.a
     )
 
     add_library(yampl-zmq SHARED
