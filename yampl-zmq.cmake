@@ -8,7 +8,8 @@ if (WITH_ZMQ_PLUGIN)
     set(ZEROMQ_ROOT ${CMAKE_BINARY_DIR}/zeromq)
     set(ZEROMQ_LIB_DIR ${ZEROMQ_ROOT}/bin/lib)
     set(ZEROMQ_INCLUDE_DIR ${ZEROMQ_ROOT}/bin/include)
-    
+    set(ZEROMQ_DIR ${ZEROMQ_ROOT})
+
     ExternalProject_Add(ZeroMQ
         GIT_REPOSITORY "https://github.com/zeromq/libzmq"
         PREFIX ${ZEROMQ_ROOT}
@@ -17,6 +18,22 @@ if (WITH_ZMQ_PLUGIN)
         PATCH_COMMAND ""
         INSTALL_DIR ${ZEROMQ_ROOT}/bin
         CMAKE_ARGS -DZMQ_BUILD_TESTS=OFF -DWITH_PERF_TOOL=OFF -DENABLE_CPACK=OFF -DCMAKE_INSTALL_PREFIX=${ZEROMQ_ROOT}/bin
+        BUILD_COMMAND make
+        TEST_COMMAND ""
+    )
+    
+    # Pull CppMQ
+    set(CPPMQ_ROOT ${CMAKE_BINARY_DIR}/cppmq)
+    set(CPPMQ_INCLUDE_DIR ${CPPMQ_ROOT}/bin/include)
+
+    ExternalProject_Add(CppMQ
+        GIT_REPOSITORY "https://github.com/zeromq/cppzmq"
+        PREFIX ${CPPMQ_ROOT}
+        GIT_TAG "6aa3ab686e916cb0e62df7fa7d12e0b13ae9fae6"
+        UPDATE_COMMAND ""
+        PATCH_COMMAND ""
+        INSTALL_DIR ${CPPMQ_ROOT}/bin
+        CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${CPPMQ_ROOT}/bin
         BUILD_COMMAND make
         TEST_COMMAND ""
     )
@@ -29,9 +46,11 @@ if (WITH_ZMQ_PLUGIN)
             ${YAMPL_PLUGIN_COMMON_SRCS}
     )
     
-    add_dependencies(yampl-zmq ZeroMQ)
+    add_dependecies(yampl-zmq CppMQ)
+    add_dependencies(CppMQ ZeroMQ)
+    
     target_include_directories(yampl-zmq PRIVATE ${CMAKE_CURRENT_LIST_DIR}/include/ ${ZEROMQ_INCLUDE_DIR})
-    target_link_libraries(yampl-zmq ${ZEROMQ_LIB_DIR}/libzmq.a)
+    # target_link_libraries(yampl-zmq ${ZEROMQ_LIB_DIR}/libzmq.a)
 
     set_target_properties(yampl-zmq
             PROPERTIES
