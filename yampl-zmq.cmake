@@ -30,6 +30,7 @@ if (WITH_ZMQ_PLUGIN)
         GIT_REPOSITORY "https://github.com/zeromq/cppzmq"
         PREFIX ${CPPMQ_ROOT}
         GIT_TAG "6aa3ab686e916cb0e62df7fa7d12e0b13ae9fae6"
+        CONFIGURE_COMMAND ""
         UPDATE_COMMAND ""
         PATCH_COMMAND ""
         CMAKE_ARGS ""
