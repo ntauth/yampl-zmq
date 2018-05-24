@@ -36,6 +36,7 @@ if (WITH_ZMQ_PLUGIN)
         CMAKE_ARGS ""
         BUILD_COMMAND ""
         TEST_COMMAND ""
+        INSTALL_COMMAND ""
     )
 
     add_library(yampl-zmq SHARED
