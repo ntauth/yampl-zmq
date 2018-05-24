@@ -30,6 +30,7 @@ if (WITH_ZMQ_PLUGIN)
     )
     
     add_dependencies(yampl-zmq ZeroMQ)
+    message(STATUS "Including zmq headers from ${ZEROMQ_INCLUDE_DIR}")
     target_include_directories(yampl-zmq PRIVATE include/ ${ZEROMQ_INCLUDE_DIR})
     target_link_libraries(yampl-zmq ${ZEROMQ_LIB_DIR}/libzmq.a)
 
