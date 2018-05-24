@@ -8,8 +8,6 @@ namespace yampl
 {
     namespace zeromq
     {
-        SCY_PLUGIN(SocketFactory, "yampl-zmq", SocketFactory::PLUGIN_VERSION)
-
         SocketFactory::SocketFactory() : m_context(new zmq::context_t(1)) { }
 
         SocketFactory::~SocketFactory() {

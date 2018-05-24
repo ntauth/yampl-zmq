@@ -14,8 +14,6 @@ namespace yampl
         class SocketFactory : public ISocketFactory
         {
             public:
-                static constexpr char const* PLUGIN_VERSION = "1.0";
-
                 SocketFactory();
                 virtual ~SocketFactory();
 
