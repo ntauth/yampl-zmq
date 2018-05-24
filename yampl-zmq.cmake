@@ -8,7 +8,7 @@ if (WITH_ZMQ_PLUGIN)
     set(ZEROMQ_ROOT ${CMAKE_BINARY_DIR}/zeromq)
     set(ZEROMQ_LIB_DIR ${ZEROMQ_ROOT}/bin/lib)
     set(ZEROMQ_INCLUDE_DIR ${ZEROMQ_ROOT}/bin/include)
-
+    
     ExternalProject_Add(ZeroMQ
         GIT_REPOSITORY "https://github.com/zeromq/libzmq"
         PREFIX ${ZEROMQ_ROOT}
@@ -22,15 +22,15 @@ if (WITH_ZMQ_PLUGIN)
     )
 
     add_library(yampl-zmq SHARED
-	    plugins/yampl-zmq/src/ClientSocket.cpp
-            plugins/yampl-zmq/src/ServerSocket.cpp
-            plugins/yampl-zmq/src/SocketBase.cpp
-            plugins/yampl-zmq/src/SocketFactory.cpp
+	    ${CMAKE_CURRENT_LIST_DIR}/src/ClientSocket.cpp
+            ${CMAKE_CURRENT_LIST_DIR}/src/ServerSocket.cpp
+            ${CMAKE_CURRENT_LIST_DIR}/src/SocketBase.cpp
+            ${CMAKE_CURRENT_LIST_DIR}/src/SocketFactory.cpp
             ${YAMPL_PLUGIN_COMMON_SRCS}
     )
     
     add_dependencies(yampl-zmq ZeroMQ)
-    target_include_directories(yampl-zmq PRIVATE include/ ${ZEROMQ_INCLUDE_DIR})
+    target_include_directories(yampl-zmq PRIVATE ${CMAKE_CURRENT_LIST_DIR}/include/ ${ZEROMQ_INCLUDE_DIR})
     target_link_libraries(yampl-zmq ${ZEROMQ_LIB_DIR}/libzmq.a)
 
     set_target_properties(yampl-zmq
