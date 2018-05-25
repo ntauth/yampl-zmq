@@ -3,7 +3,6 @@
 
 #include "yampl/ISocketFactory.h"
 #include "yampl/plugin/PluginApi.h"
-#include "yampl/plugin/IObject.hpp"
 
 namespace zmq{
   class context_t;
@@ -14,7 +13,7 @@ namespace yampl
     namespace zeromq
     {
 	opaque_ptr HOOK_CreateObject(object_init_params*);
-        hook_exec_status HOOK_DestroyObject(yampl::plugin::IObject*);
+        hook_exec_status HOOK_DestroyObject(opaque_ptr);
 
         class SocketFactory : public ISocketFactory
         {

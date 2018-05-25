@@ -15,7 +15,7 @@ namespace yampl
 			return reinterpret_cast<opaque_ptr>(&_singleton);
 		}
 
-		hook_exec_status HOOK_DestroyObject(yampl::plugin::IObject* obj)
+		hook_exec_status HOOK_DestroyObject(opaque_ptr obj)
 		{
 			return HOOK_STATUS_SUCCESS;
 		}
