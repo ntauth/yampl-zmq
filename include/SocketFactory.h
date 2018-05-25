@@ -2,6 +2,8 @@
 #define YAMPL_ZEROMQ_SOCKETFACTORY_H
 
 #include "yampl/ISocketFactory.h"
+#include "yampl/plugin/PluginApi.h"
+#include "yampl/plugin/IObject.hpp"
 
 namespace zmq{
   class context_t;
@@ -11,9 +13,14 @@ namespace yampl
 {
     namespace zeromq
     {
+	yampl::plugin::IObject* ZMQ_HOOK_CreateObject(object_init_params*);
+        hook_exec_status ZMQ_HOOK_DestroyObject(yampl::plugin::IObject*);
+
         class SocketFactory : public ISocketFactory
         {
             public:
+                static const uint32_t __OBJECT_VERSION {0};
+
                 SocketFactory();
                 virtual ~SocketFactory();
 

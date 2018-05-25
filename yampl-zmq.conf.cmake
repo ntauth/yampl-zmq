@@ -41,6 +41,7 @@ if (WITH_ZMQ_PLUGIN)
             ${CMAKE_CURRENT_LIST_DIR}/src/ServerSocket.cpp
             ${CMAKE_CURRENT_LIST_DIR}/src/SocketBase.cpp
             ${CMAKE_CURRENT_LIST_DIR}/src/SocketFactory.cpp
+            ${CMAKE_CURRENT_LIST_DIR}/src/PluginMain.cpp
             ${YAMPL_PLUGIN_COMMON_SRCS}
     )
         
