@@ -9,13 +9,13 @@ namespace yampl
     namespace zeromq
     {
 		/****************** HOOK_*Object callbacks **/
-		yampl::plugin::IObject* ZMQ_HOOK_CreateObject(object_init_params* params)
+		yampl::plugin::IObject* HOOK_CreateObject(object_init_params* params)
 		{
 			static SocketFactory _singleton;
 			return &_singleton;
 		}
 
-		hook_exec_status ZMQ_HOOK_DestroyObject(yampl::plugin::IObject* obj)
+		hook_exec_status HOOK_DestroyObject(yampl::plugin::IObject* obj)
 		{
 			return HOOK_STATUS_SUCCESS;
 		}

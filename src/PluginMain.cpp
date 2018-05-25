@@ -26,29 +26,29 @@ hook_exec_status PluginMain(plugin_init_frame* frame)
 
 	// Sanity check
 	if (frame == nullptr) {
-		status = HOOK_STATUS_FAILURE;
+            status = HOOK_STATUS_FAILURE;
 	}
 	// Plugin API version check
 	else if (frame->api_version != PLUGIN_API_VERSION) {
-		status = HOOK_STATUS_FAILURE;
+            status = HOOK_STATUS_FAILURE;
 	}
 	else
 	{
-		// Store the frame for later retrieval
-		_gbl_init_frame = *frame;
+	    // Store the frame for later retrieval
+            _gbl_init_frame = *frame;
 
-		// Register SocketFactory
-		object_register_params reg_params;
-		reg_params.obj_type   = OBJ_PROTO_SK_FACTORY;
-		reg_params.hk_create  = ZMQ_HOOK_CreateObject;
-		reg_params.hk_destroy = ZMQ_HOOK_DestroyObject;
+            // Register SocketFactory
+            object_register_params reg_params;
+            reg_params.obj_type   = OBJ_PROTO_SK_FACTORY;
+            reg_params.hk_create  = yampl::zeromq::HOOK_CreateObject;
+            reg_params.hk_destroy = yampl::zeromq::HOOK_DestroyObject;
+            
+	    hook_exec_status reg_status = frame->hk_register(&params);
 
-		hook_exec_status reg_status = frame->hk_register(&params);
-
-		if (reg_status == HOOK_STATUS_SUCCESS)
-			status = HOOK_STATUS_SUCCESS;
-		else
-			status = HOOK_STATUS_FAILURE;
+            if (reg_status == HOOK_STATUS_SUCCESS)
+                status = HOOK_STATUS_SUCCESS;
+            else
+                status = HOOK_STATUS_FAILURE;
 	}
 
 	return status;

@@ -13,8 +13,8 @@ namespace yampl
 {
     namespace zeromq
     {
-	yampl::plugin::IObject* ZMQ_HOOK_CreateObject(object_init_params*);
-        hook_exec_status ZMQ_HOOK_DestroyObject(yampl::plugin::IObject*);
+	yampl::plugin::IObject* HOOK_CreateObject(object_init_params*);
+        hook_exec_status HOOK_DestroyObject(yampl::plugin::IObject*);
 
         class SocketFactory : public ISocketFactory
         {
