@@ -1,6 +1,4 @@
-##
 # YAMPL-ZMQ
-##
 include(ExternalProject)
 
 if (WITH_ZMQ_PLUGIN)	    
