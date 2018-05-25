@@ -43,7 +43,7 @@ hook_exec_status PluginMain(plugin_init_frame* frame)
             reg_params.hk_create  = yampl::zeromq::HOOK_CreateObject;
             reg_params.hk_destroy = yampl::zeromq::HOOK_DestroyObject;
             
-	    hook_exec_status reg_status = frame->hk_register(&params);
+	    hook_exec_status reg_status = frame->hk_register(&reg_params);
 
             if (reg_status == HOOK_STATUS_SUCCESS)
                 status = HOOK_STATUS_SUCCESS;
