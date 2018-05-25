@@ -8,7 +8,7 @@
 #include "SocketFactory.h"
 
 /******************** Plugin Info **/
-#define PLUGIN_MONIKER "yampl-zmq/0"
+#define PLUGIN_MONIKER "yampl-zmq"
 #define PLUGIN_VER_MAJOR (uint8_t)1
 #define PLUGIN_VER_MINOR (uint8_t)0
 
