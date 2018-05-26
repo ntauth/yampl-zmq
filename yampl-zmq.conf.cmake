@@ -5,6 +5,7 @@ if (WITH_ZMQ_PLUGIN)
     # Pull ZeroMQ
     set(ZEROMQ_ROOT_DIR ${CMAKE_BINARY_DIR}/zeromq)
     set(ZEROMQ_LIB_DIR ${ZEROMQ_ROOT_DIR}/bin/lib)
+    set(ZEROMQ_SLIB_DIR ${ZEROMQ_ROOT_DIR}/bin/slib)
     set(ZEROMQ_LIB64_DIR ${ZEROMQ_ROOT_DIR}/bin/lib64)
     set(ZEROMQ_INCLUDE_DIR ${ZEROMQ_ROOT_DIR}/bin/include)
 
@@ -15,6 +16,7 @@ if (WITH_ZMQ_PLUGIN)
         UPDATE_COMMAND ""
         PATCH_COMMAND ""
         INSTALL_DIR ${ZEROMQ_ROOT_DIR}/bin
+        INSTALL_COMMAND "make install && mkdir ${ZEROMQ_SLIB_DIR} && mv $(ls ${ZEROMQ_LIB_DIR}*/libzmq.a) ${ZEROMQ_SLIB_DIR}"
         CMAKE_ARGS -DZMQ_BUILD_TESTS=OFF -DWITH_PERF_TOOL=OFF -DENABLE_CPACK=OFF -DCMAKE_INSTALL_PREFIX=${ZEROMQ_ROOT_DIR}/bin
         BUILD_COMMAND make
         TEST_COMMAND ""
@@ -47,9 +49,7 @@ if (WITH_ZMQ_PLUGIN)
     )
         
     target_include_directories(yampl-zmq PRIVATE ${CMAKE_CURRENT_LIST_DIR}/include ${ZEROMQ_INCLUDE_DIR} ${CPPZMQ_INCLUDE_DIR})
-    
-    file(GLOB_RECURSE ZEROMQ_LINK_LIBRARIES ${ZEROMQ_ROOT_DIR}/libzmq.a)
-    target_link_libraries(yampl-zmq ${ZEROMQ_LINK_LIBRARIES})
+    target_link_libraries(yampl-zmq ${ZEROMQ_SLIB_DIR}/libzmq.a)
 
     add_dependencies(yampl-zmq CppZMQ)
     add_dependencies(CppZMQ ZeroMQ)
