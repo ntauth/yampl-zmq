@@ -46,7 +46,7 @@ if (WITH_ZMQ_PLUGIN)
     )
         
     target_include_directories(yampl-zmq PRIVATE ${CMAKE_CURRENT_LIST_DIR}/include ${ZEROMQ_INCLUDE_DIR} ${CPPZMQ_INCLUDE_DIR})
-    target_link_libraries(yampl-zmq ${ZEROMQ_LIB_DIR}/libzmq.a)
+    target_link_libraries(yampl-zmq libzmq-static)
 
     add_dependencies(yampl-zmq CppZMQ)
     add_dependencies(CppZMQ ZeroMQ)
