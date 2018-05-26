@@ -33,8 +33,12 @@ void ClientSocket::send(SendArgs& args){
     zmq::message_t message(args.size);
 
     memcpy((void*)message.data(), args.buffer, args.size);
-    m_socket->send(message);
-   }
+    try {
+        m_socket->send(message);
+    } catch (zmq::error_t const& err) {
+        throw UnroutableException(err.what());
+    }
+  }
 }
 
 void ClientSocket::connect(){
