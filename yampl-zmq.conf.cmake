@@ -22,7 +22,7 @@ if (WITH_ZMQ_PLUGIN)
     )
     
     ExternalProject_Add_Step(ZeroMQ FixLibDir
-        COMMAND sh -c "mkdir ${ZEROMQ_SLIB_DIR} && mv $(ls ${ZEROMQ_LIB_DIR}*/libzmq.a) ${ZEROMQ_SLIB_DIR}"
+        COMMAND sh -c "mkdir ${ZEROMQ_SLIB_DIR} && mv $(find ${ZEROMQ_LIB_DIR}*/ -name \"libzmq.a\") ${ZEROMQ_SLIB_DIR}"
         DEPENDEES install
     )
 
