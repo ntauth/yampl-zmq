@@ -48,8 +48,7 @@ if (WITH_ZMQ_PLUGIN)
         
     target_include_directories(yampl-zmq PRIVATE ${CMAKE_CURRENT_LIST_DIR}/include ${ZEROMQ_INCLUDE_DIR} ${CPPZMQ_INCLUDE_DIR})
     
-    file(GLOB ZEROMQ_LINK_LIBRARIES ${ZEROMQ_LIB_DIR}/libzmq.a ${ZEROMQ_LIB64_DIR}/libzmq.a)
-    message(STATUS "[+] Linking ${ZEROMQ_LINK_LIBRARIES}")
+    file(GLOB_RECURSE ZEROMQ_LINK_LIBRARIES ${ZEROMQ_ROOT_DIR}/libzmq.a)
     target_link_libraries(yampl-zmq ${ZEROMQ_LINK_LIBRARIES})
 
     add_dependencies(yampl-zmq CppZMQ)
