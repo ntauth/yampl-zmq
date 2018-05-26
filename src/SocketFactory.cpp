@@ -8,19 +8,19 @@ namespace yampl
 {
     namespace zeromq
     {
-		/****************** HOOK_*Object callbacks **/
-		opaque_ptr HOOK_CreateObject(object_init_params* params)
-		{
-			static SocketFactory _singleton;
-			return reinterpret_cast<opaque_ptr>(&_singleton);
-		}
+        /****************** HOOK_*Object callbacks **/
+        opaque_ptr HOOK_CreateObject(object_init_params* params)
+	{
+	    static SocketFactory _singleton;
+            return reinterpret_cast<opaque_ptr>(&_singleton);
+        }
 
-		hook_exec_status HOOK_DestroyObject(opaque_ptr obj)
-		{
-			return HOOK_STATUS_SUCCESS;
-		}
+        hook_exec_status HOOK_DestroyObject(opaque_ptr obj)
+        {
+            return HOOK_STATUS_SUCCESS;
+        }
 
-		/*************************** SocketFactory **/
+        /*************************** SocketFactory **/
         SocketFactory::SocketFactory() : m_context(new zmq::context_t(1)) { }
 
         SocketFactory::~SocketFactory() {
