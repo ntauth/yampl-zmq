@@ -60,6 +60,6 @@ if (WITH_ZMQ_PLUGIN)
     )
 
     install(TARGETS yampl-zmq
-            LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/yampl/plugins/yampl-zmq
+            LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/plugins/yampl-zmq
     )
 endif()
