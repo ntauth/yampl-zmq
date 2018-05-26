@@ -5,6 +5,7 @@ if (WITH_ZMQ_PLUGIN)
     # Pull ZeroMQ
     set(ZEROMQ_ROOT ${CMAKE_BINARY_DIR}/zeromq)
     set(ZEROMQ_LIB_DIR ${ZEROMQ_ROOT}/bin/lib)
+    set(ZEROMQ_LIB64_DIR ${ZEROMQ_ROOT}/bin/lib64)
     set(ZEROMQ_INCLUDE_DIR ${ZEROMQ_ROOT}/bin/include)
 
     ExternalProject_Add(ZeroMQ
@@ -46,7 +47,9 @@ if (WITH_ZMQ_PLUGIN)
     )
         
     target_include_directories(yampl-zmq PRIVATE ${CMAKE_CURRENT_LIST_DIR}/include ${ZEROMQ_INCLUDE_DIR} ${CPPZMQ_INCLUDE_DIR})
-    target_link_libraries(yampl-zmq libzmq-static)
+    
+    file(GLOB ZEROMQ_LINK_LIBRARIES ${ZEROMQ_LIB_DIR}/libzmq.a ${ZEROMQ_LIB64_DIR}/libzmq.a)
+    target_link_libraries(yampl-zmq ${ZEROMQ_LINK_LIBRARIES})
 
     add_dependencies(yampl-zmq CppZMQ)
     add_dependencies(CppZMQ ZeroMQ)
