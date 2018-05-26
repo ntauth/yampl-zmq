@@ -4,9 +4,9 @@ include(ExternalProject)
 if (WITH_ZMQ_PLUGIN)	    
     # Pull ZeroMQ
     set(ZEROMQ_ROOT_DIR ${CMAKE_BINARY_DIR}/zeromq)
-    set(ZEROMQ_LIB_DIR ${ZEROMQ_ROOT}/bin/lib)
-    set(ZEROMQ_LIB64_DIR ${ZEROMQ_ROOT}/bin/lib64)
-    set(ZEROMQ_INCLUDE_DIR ${ZEROMQ_ROOT}/bin/include)
+    set(ZEROMQ_LIB_DIR ${ZEROMQ_ROOT_DIR}/bin/lib)
+    set(ZEROMQ_LIB64_DIR ${ZEROMQ_ROOT_DIR}/bin/lib64)
+    set(ZEROMQ_INCLUDE_DIR ${ZEROMQ_ROOT_DIR}/bin/include)
 
     ExternalProject_Add(ZeroMQ
         GIT_REPOSITORY "https://github.com/zeromq/libzmq"
