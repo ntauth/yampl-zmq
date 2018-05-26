@@ -16,12 +16,16 @@ if (WITH_ZMQ_PLUGIN)
         UPDATE_COMMAND ""
         PATCH_COMMAND ""
         INSTALL_DIR ${ZEROMQ_ROOT_DIR}/bin
-        INSTALL_COMMAND "make install && mkdir ${ZEROMQ_SLIB_DIR} && mv $(ls ${ZEROMQ_LIB_DIR}*/libzmq.a) ${ZEROMQ_SLIB_DIR}"
         CMAKE_ARGS -DZMQ_BUILD_TESTS=OFF -DWITH_PERF_TOOL=OFF -DENABLE_CPACK=OFF -DCMAKE_INSTALL_PREFIX=${ZEROMQ_ROOT_DIR}/bin
         BUILD_COMMAND make
         TEST_COMMAND ""
     )
     
+    ExternalProject_AddStep(ZeroMQ FixLibDir
+        COMMAND sh -c "mkdir ${ZEROMQ_SLIB_DIR} && mv $(ls ${ZEROMQ_LIB_DIR}*/libzmq.a) ${ZEROMQ_SLIB_DIR}"
+        DEPENDEES install
+    )
+
     # Pull CppZMQ
     set(CPPZMQ_ROOT ${CMAKE_BINARY_DIR}/cppzmq)
     set(CPPZMQ_INCLUDE_DIR ${CPPZMQ_ROOT}/src/CppZMQ)
