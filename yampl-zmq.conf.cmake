@@ -1,7 +1,7 @@
 # YAMPL-ZMQ
 include(ExternalProject)
 
-if (WITH_ZMQ_PLUGIN)	    
+if (WITH_PLUGIN_ZMQ)	    
     # Pull ZeroMQ
     set(ZEROMQ_ROOT_DIR ${CMAKE_BINARY_DIR}/zeromq)
     set(ZEROMQ_LIB_DIR ${ZEROMQ_ROOT_DIR}/bin/lib)
