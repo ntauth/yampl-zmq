@@ -51,7 +51,8 @@ if (NOT DEFINED WITH_PLUGIN_ZMQ OR WITH_PLUGIN_ZMQ)
             ${CMAKE_CURRENT_LIST_DIR}/src/PluginMain.cpp
             ${YAMPL_PLUGIN_COMMON_SRCS}
     )
-        
+
+    target_compile_options(yampl-zmq "-Wno-terminate -Wno-return-type")    
     target_include_directories(yampl-zmq PRIVATE ${CMAKE_CURRENT_LIST_DIR}/include ${ZEROMQ_INCLUDE_DIR} ${CPPZMQ_INCLUDE_DIR})
     target_link_libraries(yampl-zmq ${ZEROMQ_SLIB_DIR}/libzmq.a)
 
