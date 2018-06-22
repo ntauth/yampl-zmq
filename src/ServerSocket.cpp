@@ -30,18 +30,32 @@ void ServerSocket::send(SendArgs& args){
   }
 }
 
-void ServerSocket::sendMessage(zmq::message_t &message, const std::string *peerId){
-  if(peerId){
-    zmq::message_t address(peerId->size() + 1);
-    memcpy((void*)address.data(), peerId->c_str(), peerId->size() + 1);
-    if(m_socket->send(address, ZMQ_SNDMORE | ZMQ_DONTWAIT) == -1)
-      throw UnroutableException();
-  }else{
-    if(m_socket->send(*m_lastAddress, ZMQ_SNDMORE | ZMQ_DONTWAIT) == -1)
-      throw UnroutableException();
-  }
+void ServerSocket::sendMessage(zmq::message_t &message, const std::string *peerId)
+{
+   /**
+    * @note Newer versions of ZeroMQ throw error_t if the host is unreachable.
+    * So make sure to handle this too.
+    */
+    try
+    {
+      if(peerId)
+      {
+        zmq::message_t address(peerId->size() + 1);
+        memcpy((void*)address.data(), peerId->c_str(), peerId->size() + 1);
 
-  m_socket->send(message);
+        if(m_socket->send(address, ZMQ_SNDMORE | ZMQ_DONTWAIT) == -1)
+          throw UnroutableException();
+      }
+      else {
+        if(m_socket->send(*m_lastAddress, ZMQ_SNDMORE | ZMQ_DONTWAIT) == -1)
+          throw UnroutableException();
+      }
+    }
+    catch (zmq::error_t e) {
+      throw UnroutableException(e.what());
+    }
+
+    m_socket->send(message);
 }
 
 ssize_t ServerSocket::recv(RecvArgs& args){
